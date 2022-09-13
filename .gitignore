@@ -8,7 +8,6 @@ temp-artifacts
 node_modules
 dist/
 build/
-.vscode
 .idea
 /types
 
@@ -37,3 +36,4 @@ cache
 artifacts
 storage_layout
 out.html
+typechain

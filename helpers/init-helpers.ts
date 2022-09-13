@@ -125,7 +125,7 @@ export const initReservesByHelper = async (
       `  - Reserve ready for: ${chunkedSymbols[chunkIndex].join(", ")}`,
       chunkedInitInputParams[chunkIndex][0].underlyingAsset
     );
-    console.log("    * gasUsed", tx3.gasUsed.toString());
+    console.log("    * gasUsed", tx3?.gasUsed?.toString());
   }
 };
 
@@ -188,7 +188,7 @@ export const initNftsByHelper = async (
       `  - NFT ready for: ${chunkedSymbols[chunkIndex].join(", ")}`,
       chunkedInitInputParams[chunkIndex][0].underlyingAsset
     );
-    console.log("    * gasUsed", tx3.gasUsed.toString());
+    console.log("    * gasUsed", tx3?.gasUsed?.toString());
   }
 };
 

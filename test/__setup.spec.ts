@@ -401,7 +401,9 @@ before(async () => {
     await rawBRE.run("bend:mainnet", { skipRegistry: true });
   } else {
     console.log("-> Deploying test environment...");
-    await buildTestEnv(deployer, secondaryWallet);
+    if (process.env["SKIP_PROVISIONING"] != "true") {
+      await buildTestEnv(deployer, secondaryWallet);
+    }
   }
 
   console.log("-> Initialize make suite...");

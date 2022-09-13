@@ -2,7 +2,7 @@ import path from "path";
 import fs from "fs";
 import { HardhatUserConfig } from "hardhat/types";
 // @ts-ignore
-import { accounts } from "./test-wallets.js";
+import { accounts } from "./local-wallets.js";
 import { eEthereumNetwork, eNetwork } from "./helpers/types";
 import { BUIDLEREVM_CHAINID, COVERAGE_CHAINID } from "./helpers/buidler-constants";
 import { NETWORKS_RPC_URL, NETWORKS_DEFAULT_GAS, BLOCK_TO_FORK, buildForkConfig } from "./helper-hardhat-config";
@@ -94,6 +94,7 @@ const buidlerConfig: HardhatUserConfig = {
   mocha: {
     timeout: 0,
   },
+  defaultNetwork: "localhost",
   networks: {
     coverage: {
       hardfork: "istanbul",
@@ -102,9 +103,11 @@ const buidlerConfig: HardhatUserConfig = {
     },
     localhost: {
       hardfork: "london",
-      url: "http://localhost:8545",
+      url: "http://localhost:29933",
       chainId: BUIDLEREVM_CHAINID,
       accounts: accounts.map(({ secretKey, balance }: { secretKey: string; balance: string }) => (secretKey)),
+      gasPrice: 1e9,
+      gas: 1e6,
     },
     develop: getCommonNetworkConfig(eEthereumNetwork.develop, 4),
     rinkeby: getCommonNetworkConfig(eEthereumNetwork.rinkeby, 4),

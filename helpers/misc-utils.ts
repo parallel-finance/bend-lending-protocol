@@ -75,7 +75,23 @@ export const getNowTimeInSeconds = async () => (Date.now() / 1000).toFixed(0);
 
 export const getNowTimeInMilliSeconds = async () => Date.now().toFixed(0);
 
-export const waitForTx = async (tx: ContractTransaction) => await tx.wait(1);
+export const waitForTx = async function (tx: any) {
+  let timeoutId, result;
+  let p1 = tx.wait();
+  let p2 = new Promise((resolve, reject) => {
+    timeoutId = setTimeout(() => {
+      const LCWARN = "\x1b[33m%s\x1b[0m"; //yellow
+      console.warn(
+        LCWARN,
+        `*****warning:\ntx call with hash ${tx.hash} and nonce ${tx.nonce} timout,please check tx on chain if success\n*****`
+      );
+      resolve(tx);
+    }, 12000);
+  });
+  result = await Promise.race([p1, p2]);
+  clearTimeout(timeoutId);
+  return result;
+};
 
 export const filterMapBy = (raw: { [key: string]: any }, fn: (key: string) => boolean) =>
   Object.keys(raw)

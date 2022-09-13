@@ -54,7 +54,8 @@
     "main:verify:reserves": "npm run hardhat:main verify:reserves -- --pool Bend",
     "main:print-contracts": "npm run hardhat:main -- print-contracts",
     "main:print-config": "hardhat --network main print-config --pool Bend",
-    "prepublishOnly": "npm run compile"
+    "prepublishOnly": "npm run compile",
+    "chain:test-borrow-repay": "TS_NODE_TRANSPILE_ONLY=1 SKIP_PROVISIONING=true node -r hardhat/register ./node_modules/.bin/_mocha -- ./test/__setup.spec.ts ./test/borrow-repay.spec.ts"
   },
   "devDependencies": {
     "@chainlink/contracts": "^0.2.2",

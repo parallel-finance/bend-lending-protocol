@@ -262,11 +262,11 @@ const revertHead = async () => {
 export function makeSuite(name: string, tests: (testEnv: TestEnv) => void) {
   describe(name, () => {
     before(async () => {
-      await setSnapshot();
+      // await setSnapshot();
     });
     tests(testEnv);
     after(async () => {
-      await revertHead();
+      // await revertHead();
     });
   });
 }
